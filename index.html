@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #FFCC00, #FFCC00, #FFCC00, #FFCC00, #FFCC00);
+      background-size: 100% 500%;
+      animation: gradientAnimation 5s infinite alternate;
+      font-family: 'Arial', sans-serif;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 0 100%;
+      }
+    }
+
+    #counter-box {
+      width: 200px;
+      height: 100px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
+    }
+
+    #counter-box:hover {
+      transform: scale(1.05);
+    }
+
+    #counter {
+      font-size: 36px;
+      color: white;
+      transition: transform 0.5s;
+    }
+
+    #counter.zoom {
+      transform: scale(1.2);
+    }
+
+    /* Ajout de la bannière */
+    #banner {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-family: 'Arial', sans-serif;
+      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #banner p {
+      margin: 0 0 10px;
+    }
+
+    #banner a {
+      color: #FFCC00;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    #banner a:hover {
+      text-decoration: underline;
+    }
+
+    /* Bouton moderne */
+    .button {
+      background-color: #FFCC00;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .button:hover {
+      background-color: #333;
+      color: #FFCC00;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div id="counter-box" onclick="location.reload();">
+    <div id="counter">1</div>
+  </div>
+
+  <!-- Bannière -->
+  <div id="banner">
+    <p>Project créé par Pinou007 disponible sur GitHub. Si vous trouvez un bug ou un problème, veuillez me le signaler sur la page officielle GitHub ou via Discord. Je vous remercie de l'utiliser.</p>
+    <button class="button" onclick="window.open('https://github.com/Pinou007/CountChroma', '_blank')">Visiter la page GitHub</button>
+    <button class="button" onclick="window.open('https://github.com/Pinou007', '_blank')">Visiter le profil Pinou007</button>
+  </div>
+
+  <script>
+    let counter = 1;
+
+    function updateCounter() {
+      const counterElement = document.getElementById('counter');
+      counterElement.classList.add('zoom');
+      counterElement.innerText = counter;
+      counter++;
+      counterElement.classList.remove('zoom');
+      if (counter > 100) {
+        clearInterval(interval);
+        counterElement.innerText = "Fin";
+      }
+    }
+
+    const interval = setInterval(updateCounter, 1000);
+
+    setInterval(function() {
+      document.body.style.background = generateRandomGradient();
+      animateText();
+    }, 500);
+
+    function generateRandomGradient() {
+      const colors = [];
+      for (let i = 0; i < 5; i++) {
+        const r = Math.floor(Math.random() * 150) + 50;
+        const g = Math.floor(Math.random() * 150) + 50;
+        const b = Math.floor(Math.random() * 150) + 50;
+        colors.push(`rgb(${r},${g},${b})`);
+      }
+      return `linear-gradient(to bottom, ${colors.join(', ')})`;
+    }
+
+    function animateText() {
+      const counterElement = document.getElementById('counter');
+      counterElement.classList.add('zoom');
+      setTimeout(() => {
+        counterElement.classList.remove('zoom');
+      }, 500);
+    }
+  </script>
+</body>
+</html>
